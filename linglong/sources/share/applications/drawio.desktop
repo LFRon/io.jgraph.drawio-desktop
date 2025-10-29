@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=drawio
+Icon=drawio
+Comment=draw.io desktop
+Comment[zh_CN]=强大的开源图表绘制工具
+Exec=/opt/apps/io.jgraph.drawio-desktop/files/bin/io.jgraph.drawio-desktop %U
+Categories=Graphics;Office
+StartupWMClass=drawio
+Terminal=false
+MimeType=application/vnd.jgraph.mxfile;application/vnd.visio;
+
