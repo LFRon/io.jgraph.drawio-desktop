@@ -3,7 +3,7 @@ version: "1"
 package:
   id: io.jgraph.drawio-desktop
   name: draw.io
-  version: 28.2.5.0
+  version: 28.2.5.1
   kind: app
   description: |
     ‌draw.io‌是一款由JGraph公司开发的强大的开源图表绘制工具,这是其Linux原生版本。
@@ -14,16 +14,37 @@ runtime:
 command:
   - "/opt/apps/io.jgraph.drawio-desktop/files/bin/io.jgraph.drawio-desktop"
 
+sources:
+    - kind: file
+      url: https://github.com/jgraph/drawio-desktop/releases/download/v28.2.5/drawio-x86_64-28.2.5.AppImage
+      digest: 391a0875ca25eb37727f0e3b889775143b060f21d58fb7d9cf515e6d9e505ec5
+
 build: |
     ## 环境设置
     set -x
     export PATH=$PATH:/usr/libexec/linglong/builder/helper
     # 设置工作目录
-    SOURCES="linglong/sources"
+    SOURCES="linglong/app-sources"
     # 设置启动二进制文件名称
     BINNAME=${LINGLONG_APPID}
     # 进入工作目录
     cd ${SOURCES}
+
+    # 删除过时的lib依赖库
+    rm -f libs/*
+    # 再删除过时的应用程序库
+    rm -rf ${LINGLONG_APPID}
+    # 把AppImage挪过来
+    mv ../sources/*.AppImage target.AppImage
+    # 解压AppImage并进入squashfs-root目录
+    chmod +x target.AppImage && ./target.AppImage --appimage-extract && cd squashfs-root
+    # 拷贝必需的lib库
+    cp -a usr/lib/* ../libs
+    # 删除多余文件
+    rm -rf .DirIcon AppRun drawio.png drawio.desktop usr
+    cd .. && mv squashfs-root ${LINGLONG_APPID}
+    # 删除多余的AppImage文件
+    rm -f target.AppImage
 
     #写入启动脚本
     echo "#!/bin/bash" > bin/${BINNAME}
