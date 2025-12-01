@@ -3,7 +3,7 @@ version: "1"
 package:
   id: io.jgraph.drawio-desktop
   name: draw.io
-  version: 28.2.5.1
+  version: 29.0.3.0
   kind: app
   description: |
     ‌draw.io‌是一款由JGraph公司开发的强大的开源图表绘制工具,这是其Linux原生版本。
@@ -16,8 +16,8 @@ command:
 
 sources:
     - kind: file
-      url: https://github.com/jgraph/drawio-desktop/releases/download/v28.2.5/drawio-arm64-28.2.5.AppImage
-      digest: 8544f5d7d01ee75247eb5dc90c0c93f432a0486b82bbb4463274a9ddc9c854e7
+      url: https://github.com/jgraph/drawio-desktop/releases/download/v29.0.3/drawio-arm64-29.0.3.AppImage
+      digest: 2ac1a42f7457a5bc987ed803d2f3a01729beacbd2b4fe590e1708c201a7abb37
 
 build: |
     ## 环境设置
@@ -61,4 +61,3 @@ build: |
     cp -a bin $PREFIX
     cp -a ${LINGLONG_APPID} $PREFIX
     cp -a share $PREFIX
-    cp -a libs $PREFIX/lib
