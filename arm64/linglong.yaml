@@ -1,7 +1,7 @@
 version: "1"
 
 package:
-  id: io.jgraph.drawio-desktop
+  id: net.diagrams.drawio
   name: draw.io
   version: 29.0.3.0
   kind: app
@@ -12,7 +12,7 @@ base: org.deepin.base/25.2.1
 runtime:
 ##Add GTK3 & GTK4 Fcitx5-Frontend
 command:
-  - "/opt/apps/io.jgraph.drawio-desktop/files/bin/io.jgraph.drawio-desktop"
+  - "/opt/apps/net.diagrams.drawio/files/bin/net.diagrams.drawio"
 
 sources:
     - kind: file

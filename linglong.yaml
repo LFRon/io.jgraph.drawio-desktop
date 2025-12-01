@@ -1,7 +1,7 @@
 version: "1"
 
 package:
-  id: io.jgraph.drawio-desktop
+  id: net.diagrams.drawio
   name: draw.io
   version: 29.0.3.0
   kind: app
@@ -9,10 +9,10 @@ package:
     ‌draw.io‌是一款由JGraph公司开发的强大的开源图表绘制工具,这是其Linux原生版本。
 
 base: org.deepin.base/25.2.1
-runtime:
+runtime: null
 ##Add GTK3 & GTK4 Fcitx5-Frontend
 command:
-  - "/opt/apps/io.jgraph.drawio-desktop/files/bin/io.jgraph.drawio-desktop"
+  - "/opt/apps/net.diagrams.drawio/files/bin/net.diagrams.drawio"
 
 sources:
     - kind: file
