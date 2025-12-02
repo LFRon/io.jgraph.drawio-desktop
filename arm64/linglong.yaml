@@ -16,8 +16,8 @@ command:
 
 sources:
     - kind: file
-      url: https://github.com/jgraph/drawio-desktop/releases/download/v29.0.3/drawio-arm64-29.0.3.AppImage
-      digest: 2ac1a42f7457a5bc987ed803d2f3a01729beacbd2b4fe590e1708c201a7abb37
+      url: https://github.com/jgraph/drawio-desktop/releases/download/v29.0.3/drawio-arm64-29.0.3.deb
+      digest: 8878db8fa40b7dfc5a774f535406fb8d2445b85b450c6d525250c467e462ec70
 
 build: |
     ## 环境设置
@@ -37,27 +37,22 @@ build: |
     rm -rf ${LINGLONG_APPID}
 
     # 把AppImage挪过来
-    mv ../sources/*.AppImage target.AppImage
+    mv ../sources/*.deb target.deb
 
-    # 解压AppImage并进入squashfs-root目录
-    chmod +x target.AppImage && ./target.AppImage --appimage-extract && cd squashfs-root
-
-    # 注意: ARM64架构的AppImage不需要拷贝多余lib库
-
-    # 删除多余文件
-    rm -rf .DirIcon AppRun drawio.png drawio.desktop usr
-    # 退回上级目录
-    cd .. && mv squashfs-root ${LINGLONG_APPID}
+    # 解压deb并移动软件本体至当前目录并重命名
+    dpkg-deb -R target.deb deb
+    mv deb/opt/drawio ${LINGLONG_APPID}
+    rm -rf deb
 
     # 删除多余的AppImage文件
-    rm -f target.AppImage
+    rm -f target.deb
 
-    #写入启动脚本
+    # 写入启动脚本
     echo "#!/bin/bash" > bin/${BINNAME}
     echo "exec \"${PREFIX}/${LINGLONG_APPID}/drawio\" \"--no-sandbox\" \"\$@\"" >> bin/${BINNAME}
     chmod -R 755 *
 
-    #进行安装
+    # 进行安装
     cp -a bin $PREFIX
     cp -a ${LINGLONG_APPID} $PREFIX
     cp -a share $PREFIX

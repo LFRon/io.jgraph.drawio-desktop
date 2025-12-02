@@ -1,0 +1,2 @@
+#!/bin/bash
+exec "/opt/apps/net.diagrams.drawio/files/net.diagrams.drawio/drawio" "--no-sandbox" "$@"
